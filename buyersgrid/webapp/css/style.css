@@ -1,0 +1,16 @@
+/* Enter your custom styles here */
+div#container-buyersgrid---master--masterPage-pageTitle-left-inner {
+    width: 100%;
+}
+.sapFDynamicPageTitleHeading-CTX.sapFDynamicPageTitleMainHeadingInner , .sapFDynamicPageTitleMainHeading{
+    width: 100%;
+}
+#container-buyersgrid---master--list{
+	/*height:500px;*/
+	height: 100%;
+	overflow:auto;
+}
+
+/*.sapUiInvisibleText, .sapUiHiddenPlaceholder { 
+	display: block !important;
+}*/

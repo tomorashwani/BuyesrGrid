@@ -1,0 +1,53 @@
+ID: BuyersGrid_MTA
+_schema-version: '2.1'
+description: Buyrs Group Grid MTA app
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: buyersgrid-mta-approuter
+    type: approuter.nodejs
+    path: buyersgrid-mta-approuter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: BuyersGrid_MTA_html5_repo_runtime
+      - name: uaa_Mohawk_MTA
+      - name: dest_Mohawk_MTA
+  - name: BuyersGrid_MTA_ui_deployer
+    type: com.sap.html5.application-content
+    path: BuyersGrid_MTA_ui_deployer
+    requires:
+      - name: BuyersGrid_MTA_html5_repo_host
+    build-parameters:
+      requires:
+        - name: buyersgrid
+          artifacts:
+            - './*'
+          target-path: resources/buyersgrid
+  - name: buyersgrid
+    type: html5
+    path: buyersgrid
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: BuyersGrid_MTA_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: BuyersGrid_MTA_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: uaa_Mohawk_MTA
+    type: org.cloudfoundry.existing-service
+  - name: dest_Mohawk_MTA
+    type: org.cloudfoundry.existing-service
