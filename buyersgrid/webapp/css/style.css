@@ -14,3 +14,7 @@ div#container-buyersgrid---master--masterPage-pageTitle-left-inner {
 /*.sapUiInvisibleText, .sapUiHiddenPlaceholder { 
 	display: block !important;
 }*/
+
+.desktopTblCls .sapMListTbl {
+	table-layout: auto !important;
+}

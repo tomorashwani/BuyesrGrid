@@ -70,7 +70,7 @@ sap.ui.define([
 						"name": "Residential Broadloom"
 					}, {
 						"key": "Resilient Tile",
-						"name": "Resilient Tile"
+						"name": "Resilient Tile & Plank"
 					}, {
 						"key": "RevWood",
 						"name": "RevWood"
@@ -131,8 +131,11 @@ sap.ui.define([
 					that.gridmeta.sort(that.sortGridMeta);
 					var oModel = new JSONModel(that.gridmeta);
 					sap.ui.getCore().setModel(oModel, "configModel");
+						sap.ui.getCore().busyIndicator.close();	
 				},
-				error: function (error) {}
+				error: function (error) {
+						sap.ui.getCore().busyIndicator.close();	
+				}
 			});
 
 			$.ajax({
@@ -175,9 +178,11 @@ sap.ui.define([
 					var oModel = new JSONModel(that.warehouses);
 					that.byId("wh").setModel(oModel, "warehouses");
 					that.byId("wh2").setModel(oModel, "warehouses");
+						sap.ui.getCore().busyIndicator.close();	
 				},
 				error: function (error) {
 					that.warehouses = false;
+						sap.ui.getCore().busyIndicator.close();	
 				}
 			});
 
@@ -226,8 +231,11 @@ sap.ui.define([
 
 					that.getView().byId("masterPage2").setVisible(false);
 					that.getView().byId("masterPage").setVisible(true);
+						sap.ui.getCore().busyIndicator.close();	
 				},
-				error: function (error) {}
+				error: function (error) {
+						sap.ui.getCore().busyIndicator.close();	
+				}
 			});
 
 		},
@@ -400,6 +408,8 @@ sap.ui.define([
 			this.selectedCat = oEvent.getSource()._getSelectedItemText();
 			if (this.selectedCat === "Solid Wood") {
 				this.selectedCat = "SolidWood";
+			} else if(this.selectedCat === "Resilient Tile & Plank") {
+				this.selectedCat = "Resilient Tile";
 			}
 			this.fetchTotal = 100;
 			this.fetchSkip = 0;
@@ -525,11 +535,13 @@ sap.ui.define([
 							that.bindRecords();
 							that.getView().byId("sortButton").setEnabled(true);
 							that.getView().byId("sortButton2").setEnabled(true);
+								sap.ui.getCore().busyIndicator.close();	
 						},
 						error: function (error) {
 							console.log(error);
 							that.getView().byId("sortButton").setEnabled(false);
 							that.getView().byId("sortButton2").setEnabled(false);
+								sap.ui.getCore().busyIndicator.close();	
 							//sap.m.MessageToast.show("Error");
 							//return false;
 						}
@@ -1501,11 +1513,13 @@ sap.ui.define([
 						oTable.removeAllColumns();
 
 						oTable2.removeAllItems();
+							sap.ui.getCore().busyIndicator.close();	
 
 						// that.bindRecords();
 					},
 					error: function (error) {
 						console.log(error);
+							sap.ui.getCore().busyIndicator.close();	
 						//sap.m.MessageToast.show("Error");
 						//return false;
 					}
